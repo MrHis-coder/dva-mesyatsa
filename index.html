@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" class="is-closed">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -220,6 +220,17 @@
   #mobile .hand { display: block; margin-top: 26px; font-size: 28px; color: var(--rose); }
   @keyframes float { 50% { transform: translateY(-8px); } }
 
+  /* ===== сайт закрыт (убрать класс is-closed у html, чтобы открыть) ===== */
+  #closed { display: none; }
+  html.is-closed body > *:not(#closed) { display: none !important; }
+  html.is-closed #closed {
+    display: grid; place-items: center; min-height: 100svh; padding: 32px 20px; text-align: center;
+    background: radial-gradient(circle at 50% 35%, #2a1820, var(--bg) 70%);
+  }
+  #closed svg { width: 90px; height: auto; margin-bottom: 30px; animation: beat 1.6s ease-in-out infinite; filter: drop-shadow(0 0 22px rgba(233,163,171,.5)); }
+  #closed h1 { font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(42px, 8vw, 84px); line-height: 1.05; color: var(--gold); max-width: 900px; }
+  #closed p { margin-top: 22px; font-size: clamp(20px, 3vw, 26px); color: var(--muted); }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
   }
@@ -235,6 +246,13 @@
 </script>
 </head>
 <body class="locked">
+<div id="closed">
+  <div>
+    <svg viewBox="0 0 100 90"><path d="M50 86 C20 64 4 48 4 28 C4 14 15 4 28 4 C38 4 46 10 50 18 C54 10 62 4 72 4 C85 4 96 14 96 28 C96 48 80 64 50 86Z" fill="#e9a3ab"/></svg>
+    <h1>Сайт закрыт на подготовку к 3 месяцам</h1>
+    <p>скоро здесь будет что-то новое</p>
+  </div>
+</div>
 <div id="mobile">
   <div>
     <svg viewBox="0 0 120 90" fill="none" stroke="#f3c27a" stroke-width="3" stroke-linejoin="round">
