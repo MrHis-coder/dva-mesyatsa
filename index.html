@@ -229,6 +229,15 @@
   }
   #closed svg { width: 90px; height: auto; margin-bottom: 30px; animation: beat 1.6s ease-in-out infinite; filter: drop-shadow(0 0 22px rgba(233,163,171,.5)); }
   #closed h1 { font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(42px, 8vw, 84px); line-height: 1.05; color: var(--gold); max-width: 900px; }
+  .soon { margin-top: 34px; }
+  .soon-label { font-size: clamp(16px, 2.4vw, 20px); letter-spacing: .25em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .soon-units { display: flex; justify-content: center; gap: clamp(8px, 2vw, 18px); flex-wrap: wrap; }
+  .soon-units div {
+    min-width: clamp(72px, 13vw, 116px); padding: 16px 8px 12px; border-radius: 16px;
+    border: 1px solid rgba(243,194,122,.28); background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
+  }
+  .soon-units b { display: block; font-weight: 500; font-size: clamp(38px, 7vw, 64px); line-height: 1; color: var(--gold); font-variant-numeric: tabular-nums; }
+  .soon-units span { display: block; margin-top: 6px; font-size: clamp(12px, 1.8vw, 15px); letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
   #closed p { margin-top: 22px; font-size: clamp(20px, 3vw, 26px); color: var(--muted); }
 
   @media (prefers-reduced-motion: reduce) {
@@ -250,9 +259,40 @@
   <div>
     <svg viewBox="0 0 100 90"><path d="M50 86 C20 64 4 48 4 28 C4 14 15 4 28 4 C38 4 46 10 50 18 C54 10 62 4 72 4 C85 4 96 14 96 28 C96 48 80 64 50 86Z" fill="#e9a3ab"/></svg>
     <h1>Сайт закрыт на подготовку к 3 месяцам</h1>
+    <div class="soon" id="soon">
+      <div class="soon-label">до 29 ноября осталось</div>
+      <div class="soon-units">
+        <div><b id="sd">0</b><span>дней</span></div>
+        <div><b id="sh">00</b><span>часов</span></div>
+        <div><b id="sm">00</b><span>минут</span></div>
+        <div><b id="ss">00</b><span>секунд</span></div>
+      </div>
+    </div>
     <p>скоро здесь будет что-то новое</p>
   </div>
 </div>
+<script>
+  (function () {
+    const OPEN = new Date(2026, 10, 29, 0, 0, 0); // 29 ноября
+    const pad = n => String(n).padStart(2, '0');
+    function tickSoon() {
+      let left = Math.max(0, Math.floor((OPEN - Date.now()) / 1000));
+      if (left === 0) {
+        document.querySelector('#soon .soon-label').textContent = 'три месяца уже наступили';
+        document.querySelector('#soon .soon-units').style.display = 'none';
+        return;
+      }
+      const d = Math.floor(left / 86400); left -= d * 86400;
+      const h = Math.floor(left / 3600); left -= h * 3600;
+      const m = Math.floor(left / 60);
+      document.getElementById('sd').textContent = d;
+      document.getElementById('sh').textContent = pad(h);
+      document.getElementById('sm').textContent = pad(m);
+      document.getElementById('ss').textContent = pad(left - m * 60);
+    }
+    tickSoon(); setInterval(tickSoon, 1000);
+  })();
+</script>
 <div id="mobile">
   <div>
     <svg viewBox="0 0 120 90" fill="none" stroke="#f3c27a" stroke-width="3" stroke-linejoin="round">
