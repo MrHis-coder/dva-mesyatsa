@@ -260,7 +260,7 @@
     <svg viewBox="0 0 100 90"><path d="M50 86 C20 64 4 48 4 28 C4 14 15 4 28 4 C38 4 46 10 50 18 C54 10 62 4 72 4 C85 4 96 14 96 28 C96 48 80 64 50 86Z" fill="#e9a3ab"/></svg>
     <h1>Сайт закрыт на подготовку к 3 месяцам</h1>
     <div class="soon" id="soon">
-      <div class="soon-label">до 29 ноября осталось</div>
+      <div class="soon-label">до окончания работ осталось</div>
       <div class="soon-units">
         <div><b id="sd">0</b><span>дней</span></div>
         <div><b id="sh">00</b><span>часов</span></div>
@@ -273,12 +273,12 @@
 </div>
 <script>
   (function () {
-    const OPEN = new Date(2026, 10, 29, 0, 0, 0); // 29 ноября
+    const OPEN = new Date(2026, 10, 29, 0, 0, 0); // окончание работ: 29 ноября
     const pad = n => String(n).padStart(2, '0');
     function tickSoon() {
       let left = Math.max(0, Math.floor((OPEN - Date.now()) / 1000));
       if (left === 0) {
-        document.querySelector('#soon .soon-label').textContent = 'три месяца уже наступили';
+        document.querySelector('#soon .soon-label').textContent = 'работы завершены';
         document.querySelector('#soon .soon-units').style.display = 'none';
         return;
       }
